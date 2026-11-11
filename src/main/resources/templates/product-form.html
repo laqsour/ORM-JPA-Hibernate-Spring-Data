@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title th:text="${pageTitle}">Produit</title></head>
+<body>
+<section layout:fragment="content">
+    <div class="card shadow-sm mx-auto" style="max-width: 700px;">
+        <div class="card-header bg-primary text-white"><h3 class="mb-0" th:text="${pageTitle}"></h3></div>
+        <div class="card-body">
+            <form th:action="${formAction}" th:object="${product}" method="post">
+                <input type="hidden" th:field="*{id}">
+                <div class="mb-3">
+                    <label class="form-label">Nom du produit</label>
+                    <input class="form-control" type="text" th:field="*{name}" placeholder="Ex. Ordinateur portable">
+                    <div class="text-danger small" th:errors="*{name}"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Prix (DH)</label>
+                    <input class="form-control" type="number" step="0.01" min="0" th:field="*{price}">
+                    <div class="text-danger small" th:errors="*{price}"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Quantité</label>
+                    <input class="form-control" type="number" min="0" th:field="*{quantity}">
+                    <div class="text-danger small" th:errors="*{quantity}"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-control" rows="3" th:field="*{description}"></textarea>
+                    <div class="text-danger small" th:errors="*{description}"></div>
+                </div>
+                <button class="btn btn-success" type="submit">Enregistrer</button>
+                <a class="btn btn-secondary" th:href="@{/products}">Annuler</a>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
